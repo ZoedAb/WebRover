@@ -1,3 +1,4 @@
+import sys
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain_anthropic import ChatAnthropic
@@ -48,7 +49,7 @@ llm_o3_mini = ChatOpenAI(model="o3-mini", reasoning_effort="high")
 
 llm_anthropic = ChatAnthropic(model="claude-3-5-sonnet-20240620", temperature=0)
 llm_openai_o1 = ChatOpenAI(model="o1-preview", temperature=1)
-llm = llm_4o
+llm = llm_o3_mini
 
 
 

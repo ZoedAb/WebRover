@@ -1,3 +1,4 @@
+import sys
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
@@ -18,9 +19,15 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from playwright.async_api import async_playwright
 
-app = FastAPI()
+
+if sys.platform.startswith("win"):
+    asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
+
+
+
 
 app = FastAPI()
+
 
 app.add_middleware(
     CORSMiddleware,

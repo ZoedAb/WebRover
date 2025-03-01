@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain_anthropic import ChatAnthropic
+from langchain_google_genai import ChatGoogleGenerativeAI
 import os
 from typing import TypedDict, Annotated, List, Literal
 from playwright.async_api import Page
@@ -38,7 +39,7 @@ def set_env_vars(var):
         os.environ[var] = value
 
 
-vars = ["OPENAI_API_KEY", "LANGCHAIN_API_KEY", "LANGCHAIN_TRACING_V2", "LANGCHAIN_ENDPOINT", "LANGCHAIN_PROJECT", "TAVILY_API_KEY", "ANTHROPIC_API_KEY"]
+vars = ["GENAI_API_KEY","OPENAI_API_KEY", "LANGCHAIN_API_KEY", "LANGCHAIN_TRACING_V2", "LANGCHAIN_ENDPOINT", "LANGCHAIN_PROJECT", "TAVILY_API_KEY", "ANTHROPIC_API_KEY"]
 
 for var in vars:
     set_env_vars(var)
@@ -49,7 +50,7 @@ llm_o3_mini = ChatOpenAI(model="o3-mini", reasoning_effort="high")
 
 llm_anthropic = ChatAnthropic(model="claude-3-5-sonnet-20240620", temperature=0)
 llm_openai_o1 = ChatOpenAI(model="o1-preview", temperature=1)
-llm = llm_4o
+llm = llm_o3_mini
 
 
 class Url(BaseModel):

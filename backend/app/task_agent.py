@@ -1,4 +1,6 @@
 from dotenv import load_dotenv
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_groq import ChatGroq
 from langchain_openai import ChatOpenAI
 from langchain_anthropic import ChatAnthropic
 import os
@@ -72,19 +74,25 @@ def set_env_vars(var):
         os.environ[var] = value
 
 
-vars = ["OPENAI_API_KEY", "LANGCHAIN_API_KEY", "LANGCHAIN_TRACING_V2", "LANGCHAIN_ENDPOINT", "LANGCHAIN_PROJECT", "TAVILY_API_KEY"]
+vars = ["GROQ_API_KEY","OPENRouter_API_KEY","GOOGLE_API_KEY","OPENAI_API_KEY", "LANGCHAIN_API_KEY", "LANGCHAIN_TRACING_V2", "LANGCHAIN_ENDPOINT", "LANGCHAIN_PROJECT", "TAVILY_API_KEY"]
 
 for var in vars:
     set_env_vars(var)
 
+llm_groq = ChatGroq(model="llama-3.3-70b-versatile", temperature=0.3, max_tokens=400)
+
 llm_4o = ChatOpenAI(model="gpt-4o", temperature=0)
-llm_mini = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+llm_mini = ChatGroq(model="llama-3.1-8b-instant", temperature=0) #ChatOpenAI(model="gpt-4o-mini", temperature=0)
 llm_o3_mini = ChatOpenAI(model="o3-mini", reasoning_effort="high")
 
 llm_anthropic = ChatAnthropic(model="claude-3-5-sonnet-20240620", temperature=0)
 llm_openai_o1 = ChatOpenAI(model="o1-preview", temperature=1)
-llm = llm_4o
 
+llm_DeepSeek = ChatOpenAI(model="google/gemini-2.0-flash-thinking-exp:free", temperature=0.5, base_url="https://openrouter.ai/api/v1", api_key=os.getenv("OPENRouter_API_KEY"))
+
+llm_genai = ChatGoogleGenerativeAI(model="gemini-2.0-flash-thinking-exp-01-21", temperature=0.5)
+llm = llm_groq
+llm_mini = llm_groq
   
 
 async def setup_browser(go_to_page: str):

@@ -8,6 +8,10 @@ env/
 venv/
 .env
 
+
+app/task_agent copy.py
+app/task_agent.txt
+
 # Development
 .vscode/
 .idea/
@@ -21,3 +25,5 @@ old_backend/
 
 # Logs
 *.log
+
+test_gemini.py
